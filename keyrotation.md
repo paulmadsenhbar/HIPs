@@ -1,16 +1,14 @@
 ---
-hip: 412
+hip: xxxxx
 title: Key Rotation
-author: May Chan <may@hashpack.app>
-working-group: Cooper Kuntz (@Cooper-Kunz), Paul Madsen (@paulatcalaxy), Patches (@HGP_Patches), DPub (@dpubbrewmaster), Ashe Oro (@Ashe_Oro), Brandon Davenport (@itsbrandond), Justyn (@justynjj), minteralogy (@minteralogy)
-type: Informational
+author: Paul Madsen <paul@hbar.fund>
+type: Standard
 needs-council-approval: No
 status: Active
-discussions-to: https://github.com/hashgraph/hedera-improvement-proposal/discussions/413
-replaces: 10
+discussions-to:
 last-call-date-time: 2022-04-15T07:00:00Z
-created: 2022-04-01
-updated: 2022-04-27
+created: 2022-08-01
+
 ---
 
 ## Abstract
