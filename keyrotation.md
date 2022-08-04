@@ -1,7 +1,7 @@
 ---
 hip: xxxxx
 title: Key Rotation
-author: Paul Madsen <paul@hbar.fund>, Jo@meeco, justin@SL
+author: Paul Madsen <paul@hbar.fund>, Jo@meeco
 type: Standard
 needs-council-approval: No
 status: Active
@@ -15,9 +15,13 @@ created: 2022-08-01
 
 This HIP specifies a mechanism for protecting Hedera accounts, topics, and tokens etc from key takeover. An account owner can 'pre-announce' a public key when creating the state entity such that subsequent key management operations like AccountUpdate must be signed by the private key associated with the pre-announced key to be considered valid. In this manner, even if an account's key is stolen , the attacker will be unable to take over the account as they will not have the pre-announced key.
 
+In this model, for any Hedera state entity, there can be a 'hot' key that can only sign transactions, but not change the key pair. The pre-announced key 'cold' key is uniquely authorized to rotate the current hot key and replace it with itself. 
+
+q: For enhanced security, the pre-announced cold key could self be a multi-sig with appropriate threshold rules (presumably not if we pre-announce only the digest?)
+
 ## Motivation
 
-There is security value in being able to keep a private key for sensitive adminstrative transactions on Hedera state entities in cold storage. This mechanism allows s private key used solely for key rotation oeprations to be annoucned to the hedera network as 'pre-rotated', ie provisioned as the *next* key in a sequence. Once pre-announced, this key can be  maintained in cold storage.
+There is security value in being able to keep a private key for sensitive adminstrative transactions on Hedera state entities in cold storage. This mechanism allows s private key used solely for key rotation oeprations to be announced to the hedera network as 'pre-rotated', ie provisioned as the *next* key in a sequence. Once pre-announced, this key can be  maintained in cold storage and brought only for key rotation transactions.
 
 The only way the attacker can take over the private key infrastructure, is to steal the pre-rotated private key. But a number factors make this extremely difficult:
 
