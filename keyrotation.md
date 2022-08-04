@@ -38,7 +38,7 @@ Hedera supports a powerful muti-signatue model by which the risk of compromise o
 
 ## Specification
 
-The hash of a private key is provisioned via the transaction that creates the hedera state entity. 
+The hash of a public key is provisioned via the transaction that creates the hedera state entity. 
 
 The pre-rotation will ensure that the key controller not only provisions a public key when creating a Hedera state entity, but can also optionally commitment to the next public key (called the pre-rotated public key). This commitment is in the form of a digest of the pre-rotated public key.
 
