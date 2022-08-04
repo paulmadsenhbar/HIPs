@@ -17,9 +17,9 @@ This HIP specifies a mechanism for protecting Hedera state entities like account
 
 In this manner, even if an account's hot key is stolen , the attacker will be unable to take over the state entity as they will not have the pre-rotated key and so cannot lock the valid owner out. 
 
-In this model, for any Hedera state entity, there can be a 'hot' key that can sign transactions, but not change the key on the state entity. There is a seprate pre-rotated key 'cold' key that is uniquely authorized to rotate the current hot key and replace it with itself. 
+In this model, for any Hedera state entity, there can be a 'hot' key that can sign transactions, but not change the key on the state entity. There is a separate pre-rotated key that is uniquely authorized to rotate the current hot key and replace it with itself. Only useful for key rotation, this pre-rotated key can be kept cold.
 
-For enhanced security, the pre-announced cold key could self be a multi-sig with appropriate threshold rules (presumably not if we pre-announce only the digest?)
+For enhanced security, the pre-rotated cold key could self be a multi-sig with appropriate threshold rules (presumably not if we pre-announce only the digest?)
 
 ## Motivation
 
