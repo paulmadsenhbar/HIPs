@@ -13,9 +13,11 @@ created: 2022-08-01
 
 ## Abstract
 
-This HIP specifies a mechanism for protecting Hedera state entities like accounts, topics, and tokens etc from takeover after key compromise. An account owner can 'pre-announce' a public key when creating the state entity such that subsequent key management operations like AccountUpdate must be signed by the private key associated with the pre-announced key to be considered valid. In this manner, even if an account's hot key is stolen , the attacker will be unable to take over the account as they will not have the pre-announced key. 
+This HIP specifies a mechanism for protecting Hedera state entities like accounts, topics, and tokens etc from takeover after key compromise. An account owner can 'pre-rotate' a public key when creating the state entity such that subsequent key management operations via AccountUpdate must be signed by the private key associated with the pre-rotated key to be considered valid. 
 
-In this model, for any Hedera state entity, there can be a 'hot' key that can only sign transactions, but not change the key pair. The pre-announced key 'cold' key is uniquely authorized to rotate the current hot key and replace it with itself. 
+In this manner, even if an account's hot key is stolen , the attacker will be unable to take over the state entity as they will not have the pre-rotated key and so cannot lock the valid owner out. 
+
+In this model, for any Hedera state entity, there can be a 'hot' key that can sign transactions, but not change the key on the state entity. There is a seprate pre-rotated key 'cold' key that is uniquely authorized to rotate the current hot key and replace it with itself. 
 
 For enhanced security, the pre-announced cold key could self be a multi-sig with appropriate threshold rules (presumably not if we pre-announce only the digest?)
 
@@ -40,7 +42,7 @@ Hedera supports a powerful muti-signatue model by which the risk of compromise o
 
 The hash of a public key is provisioned via the transaction that creates the hedera state entity. 
 
-The pre-rotation will ensure that the key controller not only provisions a public key when creating a Hedera state entity, but can also optionally commitment to the next public key (called the pre-rotated public key). This commitment is in the form of a digest of the pre-rotated public key.
+The pre-rotation will ensure that the key controller not only provisions a public key when creating a Hedera state entity, but can also optionally make a commitment to the next public key (called the pre-rotated public key). This commitment is in the form of a digest of the pre-rotated public key.
 
 
 1. an account is created - 2 keys are provided. 1 will be the one used until rotated , the other will be the hash of a pre-rotated key
@@ -49,7 +51,7 @@ The pre-rotation will ensure that the key controller not only provisions a publi
 4. some time later, the account owner suspects the hot key is compromised and decides to rotate
 5. the account owner creates an AccountUpdate tx signed by the previously pre-announced key (and also optionally? providing the hash of the next pre-rotated key)
 6. nodes verify that the transaction is signed by the private key associated with the previously pre-rotated key
-7. nodes heneforth a) use the first pre-rotated key as the hot key and b) store the hash of the second pre-rotated key against future key rotation transactions
+7. nodes henceforth a) use the first pre-rotated key as the hot key and b) store the hash of the second pre-rotated key against future key rotation transactions
 
 ## Backwards Compatibility
 
