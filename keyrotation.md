@@ -13,7 +13,7 @@ created: 2022-08-01
 
 ## Abstract
 
-This HIP specifies a mechanism for protecting Hedera state entities like accounts, topics, and tokens etc from takeover after key compromise. An account owner can 'pre-rotate' a public key when creating the state entity such that subsequent key management operations via AccountUpdate must be signed by the private key associated with the pre-rotated key to be considered valid. 
+This HIP specifies a mechanism for protecting Hedera state entities like accounts, topics, and tokens etc from takeover after key compromise. The owner of a state entity can 'pre-rotate' a public key when creating the state entity such that subsequent key management operations via an Update transaction must be signed by the private key associated with the pre-rotated key to be considered valid. 
 
 In this manner, even if an account's hot key is stolen , the attacker will be unable to take over the state entity as they will not have the pre-rotated key and so cannot lock the valid owner out. 
 
@@ -62,7 +62,7 @@ It is optional to pre-rotate a key when creating a state entity. Any existing st
 
 A pre-rotated key must be defined at the time of state entity creation. 
 
-If the attacker steals the hot key, they would be able to sign all transactions other than an AccountUpdate changing the keys. As such, they would be able to send HBARs etc. It would be the actual owner's resonsibility to monitor for such fraudulent transactions and (quickly) use the pre-rotated key from cold storage to change the key and prevent the attacker from cuasing any further harm.
+If the attacker steals the hot key, they would be able to sign all transactions other than an AccountUpdate changing the keys. As such, they would be able to send HBARs etc. It would be the actual owner's resonsibility to monitor for such fraudulent transactions and (quickly) use the pre-rotated key from cold storage to change the key and prevent the attacker from causing any further harm.
 
 ## How to Teach This
 
@@ -70,7 +70,9 @@ Provides a useful option for enhanced security of hedera state entities with dif
 
 ## Rejected Ideas
 
-It could be possible to allow more rigorous multi-signature rules for AccountUpdate transactions to be defined than for other transactions. Some of those sensitive operation keys could be stored cold. However, this would still presume that they keys would be public and so possibly provide to the attacker information??
+It would be possible to allow more rigorous multi-signature rules for AccountUpdate transactions to be defined than for other transactions. Some of those sensitive operation keys could be stored cold and so provide comparable protection against compromise of the hot keys.
+
+However, this would still presume that these cold keys would be public and so possibly provide to the attacker information.
 
 ## Open Issues
 
