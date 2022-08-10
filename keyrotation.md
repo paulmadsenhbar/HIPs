@@ -1,7 +1,7 @@
 ---
 hip: xxxxx
 title: Pre-Rotated Keys 
-author: Paul Madsen <paul@hbar.fund>, Jo@meeco
+author: Paul Madsen <paul@hbar.fund>, Jo Vercammen  <jo.vercammen@meeco.me>
 type: Standard
 needs-council-approval: No
 status: Active
@@ -15,15 +15,16 @@ created: 2022-08-01
 
 This HIP specifies a mechanism for protecting Hedera state entities like accounts, topics, and tokens etc from takeover after key compromise. The owner of a state entity can 'pre-rotate' a public key when creating the state entity such that subsequent key management operations via an Update transaction must be signed by the private key associated with the pre-rotated key to be considered valid. 
 
-In this manner, even if an account's hot key is stolen , the attacker will be unable to take over the state entity as they will not have the pre-rotated key and so cannot lock the valid owner out. 
+In this model, for any Hedera state entity, there can be a 'hot' key that can sign transactions, but not change the key on the state entity. There is a separate pre-rotated key that is uniquely authorized to rotate the current hot key and replace it with itself. Only useful for key rotation, this pre-rotated key  is recommend to kept cold.
 
-In this model, for any Hedera state entity, there can be a 'hot' key that can sign transactions, but not change the key on the state entity. There is a separate pre-rotated key that is uniquely authorized to rotate the current hot key and replace it with itself. Only useful for key rotation, this pre-rotated key can be kept cold.
+Attackers will likely search for hot keys, as these have traces of their behaviour and leave residue behind in their use. For instance, attacker could try to read-out memory banks in search of such private keys that are related to certain public keys he found in the public sphere.
+In this manner, even if an account's hot key is stolen, the attacker will be unable to take over the state entity. They still need the pre-rotated key and are not able to lock out the valid owner.
 
 For enhanced security, the pre-rotated cold key could self be a multi-sig with appropriate threshold rules (presumably not if we pre-announce only the digest?)
 
 ## Motivation
 
-There is security value in being able to keep a private key for sensitive adminstrative transactions on Hedera state entities in cold storage. This mechanism allows s private key used solely for key rotation oeprations to be announced to the Hedera network as 'pre-rotated', ie provisioned as the *next* key in a sequence. Once pre-rotated, this key can be  maintained in cold storage and brought only for key rotation transactions.
+There is security value in being able to keep a private key for sensitive administrative transactions on Hedera state entities in cold storage. This mechanism allows private key used solely for key rotation operations to be announced to the Hedera network as 'pre-rotated', ie provisioned as the *next* key in a sequence. Once pre-rotated, this key is maintained in cold storage and brought only for key rotation transactions.
 
 The only way the attacker can take over the private key infrastructure, is to steal the pre-rotated private key. But a number factors make this extremely difficult:
 
@@ -36,11 +37,13 @@ The only way the attacker can take over the private key infrastructure, is to st
 
 ## Rationale
 
-Hedera supports a powerful muti-signatue model by which the risk of compromise of individual private keys can be mitigated. However, Hedera does not allow administrative actions such as AccountUpdate to have different multi-sig requirements than other less sensitive transactions. Consequently, while would be possible to stipulate a multi-sig rule with multiple keys and keep one or more in cold storage, it woudl be .......
+Hedera supports a powerful muti-signature model by which the risk of compromise of individual private keys can be mitigated. However, Hedera does not allow administrative actions such as AccountUpdate to have different multi-sig requirements than other less sensitive transactions. Consequently, while would be possible to stipulate a multi-sig rule with multiple keys and keep one or more in cold storage, the signing process would require that the keys are being exposed and needs to be organised in isolation from each other.  
+
+The above system, provides security model for a single signing process and provides daily transactional signing without retrieving keys from cold storage.
 
 ## Specification
 
-The hash of a public key is provisioned via the transaction that creates the hedera state entity. 
+The hash of a public key is provisioned via the transaction that creates the Hedera state entity. 
 
 The pre-rotation will ensure that the key controller not only provisions a public key when creating a Hedera state entity, but can also optionally make a commitment to the next public key (called the pre-rotated public key). This commitment is in the form of a digest of the pre-rotated public key.
 
@@ -62,11 +65,15 @@ It is optional to pre-rotate a key when creating a state entity. Any existing st
 
 A pre-rotated key must be defined at the time of state entity creation. 
 
-If the attacker steals the hot key, they would be able to sign all transactions other than an AccountUpdate changing the keys. As such, they would be able to send HBARs etc. It would be the actual owner's resonsibility to monitor for such fraudulent transactions and (quickly) use the pre-rotated key from cold storage to change the key and prevent the attacker from causing any further harm.
+If the attacker steals the hot key, they would be able to sign all transactions other than an AccountUpdate changing the keys. As such, they would be able to send HBARs etc. It would be the actual owner's responsibility to monitor for such fraudulent transactions and (quickly) use the pre-rotated key from cold storage to change the key and prevent the attacker from causing any further harm.
+
+Important actions on storing and generating the pre-announced private/public key pair. It's recommended that the generation of such key pairs are done inside a secure enclave (a password vault, Key vault) to avoid eavesdropping during generation. Storing of the public and private key pair should be done separately with no direct relationship between each other.  
+The pre-announced key has no history. So even if the attacker finds the private key, he can't validate this against the pre-announced digest of the public key.
+
 
 ## How to Teach This
 
-Provides a useful option for enhanced security of hedera state entities with different characteristics than multi-sig.
+Provides a useful option for enhanced security of Hedera state entities with different characteristics than multi-sig.
 
 ## Rejected Ideas
 
