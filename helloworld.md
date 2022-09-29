@@ -1,19 +1,25 @@
 ---
 hip: xxxxx
 title: Guardian Standard Registry Discovery 
-author: Paul Madsen <paul@hbar.fund>
+author:lots of contributors eventually 
 type: Standard
 needs-council-approval: No
 status: Active
 discussions-to:
-last-call-date-time: 2022-04-15T07:00:00Z
+last-call-date-time: 
 created: 2022-10-01
 
 ---
 
 ## Abstract
 
-This HIP specifies a mechanism by which Standard Registries can register themselves such that other actors can discover them. 
+This HIP specifies a mechanism by which Guardian-enabled Standard Registries (SR) can register themselves such that other actors can discover them, along with the tokenized assets representing ESG credeits & debits. 
+
+At the time of inititialization, a SR sends a 'Hello World' message to a shared Hedera Consensus Service (HCS) topic announcing its existence, attributes, and the specific HCS topic to which it will send its own subsequent messages. 
+
+The history of these Hello World messages sent to this shared topic by different SRs consequently acts as a catalog of all Guardian-enabled SRs. Other participants in the ecosystem can query this history to discover SRs that might be of interest - particularly to discover the tokenized assets minted by that SR.
+
+This HIP normalizes the 'Hello World' mechanism.
 
 ## Motivation
 
@@ -24,6 +30,12 @@ Why do we want to enable discovery?
 Why use HCS & a well-known topic?
 
 ## Specification
+
+### Shared Discovery Topic Identifier
+
+The official shared discovery topic identifier is 0.0.xxxxxx
+
+### Message Schema
 
 A Standard Registry registers itself for subsequent discovery by sending a Hedera Consensus Service (HCS) message to a pre-defined topic. 
 
@@ -45,8 +57,23 @@ Below is an example message
   }
 }
 ```
+The above message announces a new SR and its associated HCS topic identifier. The attributes allow actors who read this messages from the shared topic history to determine if the SR and its associated tokenized assets are of interest. If so, they can query the SR specific topic identifier to dig deeper and find those associated assets and their full provenance chain.
+
+### Topic Mutability
+
+If an HCS topic has an admin key, then it can be updated/modified.
+
+the Guardian shared discovery topic has no admin key and as such, can not be modified once created and so can be considered immutable.
+
+### Topic Submission Authorization
+
+Authorization for submission against an HCS topic is controlled by the topic owner stipulating a list of public keys. Only submissions signed by the corresponding private key will be authorized.
+
+The Guardian shared discovery topic has no submission keys and as such, any actor can submit to the shared topic. Consequently, the existence of an entry for a SR in the history for the shared topic should not be interpreted as endorsement or certification.
 
 ## Backwards Compatibility
+
+n/a
 
 ## Security Implications
 
