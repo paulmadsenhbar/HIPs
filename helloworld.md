@@ -27,9 +27,13 @@ Why do we want to enable discovery?
 
 ## Rationale
 
-Why use HCS & a well-known topic?
+HCS provides a trusted & provable log of events. Messages are submitted to the Hedera network for consensus, given a trusted timestamp, and fairly ordered. 
 
-## Specification
+The messages submitted to a particular topic over time are stored by Hedera mirror nodes. The history of messages for any topic can be queried by any application.
+
+Applications can subsribe to an HCS topic so that they are informed of new messages for that topic.
+
+ HCS allows any SR to announce its existence to the community and for interested applications to both be informed of those new SRs and, if of interet, to navigate to the corresponding tokens and their trust chains. 
 
 ### Shared Discovery Topic Identifier
 
@@ -57,17 +61,17 @@ Below is an example message
   }
 }
 ```
-The above message announces a new SR and its associated HCS topic identifier. The attributes allow actors who read this messages from the shared topic history to determine if the SR and its associated tokenized assets are of interest. If so, they can query the SR specific topic identifier to dig deeper and find those associated assets and their full provenance chain.
+The above message announces a new SR and its associated HCS topic identifier. The attributes allow actors who read this messages from the shared topic history to determine if the SR and its associated tokenized assets are of interest. If so, they can query the SR specific topic identifier (0.0.34234020 in above) to dig deeper and find those associated assets and their full provenance chain.
 
 ### Topic Mutability
 
 If an HCS topic has an admin key, then it can be updated/modified.
 
-the Guardian shared discovery topic has no admin key and as such, can not be modified once created and so can be considered immutable.
+The Guardian shared discovery topic has no admin key and as such, cannot be modified once created and so can be considered immutable.
 
 ### Topic Submission Authorization
 
-Authorization for submission against an HCS topic is controlled by the topic owner stipulating a list of public keys. Only submissions signed by the corresponding private key will be authorized.
+Authorization for submission against an HCS topic is controlled by the topic owner stipulating a list of public keys. Only messages signed by the corresponding private key will be authorized.
 
 The Guardian shared discovery topic has no submission keys and as such, any actor can submit to the shared topic. Consequently, the existence of an entry for a SR in the history for the shared topic should not be interpreted as endorsement or certification.
 
