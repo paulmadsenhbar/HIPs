@@ -13,11 +13,11 @@ created: 2022-10-01
 
 ## Abstract
 
-This HIP specifies a mechanism by which Guardian-enabled Standard Registries (SR) can register themselves such that other actors can discover them, along with the tokenized assets representing ESG credeits & debits. 
+This HIP specifies a mechanism by which Guardian-enabled Standard Registries (SR) can announce themselves such that other actors can discover them, along with the artefacts and tokenized assets representing ESG credeits & debits. 
 
-At the time of inititialization, a SR sends a 'Hello World' message to a shared Hedera Consensus Service (HCS) topic announcing its existence, attributes, and the specific HCS topic to which it will send its own subsequent messages. 
+At the time of inititialization, a SR sends an initialization (a.k.a. 'Hello World') message to a shared Hedera Consensus Service (HCS) topic broadcasting its existence, attributes, and the specific HCS topic which would become dedicated 'root' for its ontology of topics into which it will send its own subsequent messages. 
 
-The history of these Hello World messages sent to this shared topic by different SRs consequently acts as a catalog of all Guardian-enabled SRs. Other participants in the ecosystem can query this history to discover SRs that might be of interest - particularly to discover the tokenized assets minted by that SR.
+The history of these 'Hello World' messages sent to this shared topic by different SRs consequently acts as a catalog of all Guardian-enabled SRs. Other participants in the ecosystem can query this history to discover SRs that might be of interest - particularly to discover the tokenized assets minted by that SR.
 
 This HIP normalizes the 'Hello World' mechanism.
 
@@ -41,7 +41,17 @@ The official shared discovery topic identifier is 0.0.xxxxxx
 
 ### Message Schema
 
-A Standard Registry registers itself for subsequent discovery by sending a Hedera Consensus Service (HCS) message to a pre-defined topic. 
+A Standard Registry registers itself for subsequent discovery by sending a Hedera Consensus Service (HCS) message to a pre-defined topic.
+
+The message if formatted as a JSON object, with an extendable set of attributes. The following attributes are mandatory:
+- 'type': should have 'Standard Registry' value.
+- 'id': UUID of the message.
+- 'did': DID of the Standard Registry sending the message.
+- 'action': should have 'Init' value.
+- 'topicId': the ID of the root topic for this Standard Registry.
+- 'lang': contains the language/encoding of the messages produced by this Standard Registry.
+
+The 'attributes' section is optional, Standard Registries can chose which specific properties/attributes of their functionality need to be announced to the world. We anticipate the emergence of best practices for different industry sectors and geographic areas, this format was created to accomodate such potential future developments.
 
 Below is an example message
 
