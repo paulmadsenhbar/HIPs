@@ -48,19 +48,28 @@ locked account for renewal.
 
 ## Specification
 
-Make setKey optional on the AccountCreateTransaction transaction.
+If an account has no public key, and so no associated private key, it would be unable to sign the transaction, either create or update, that designated the
+account as the autoRenewalAccount for some other state entity.
+
+Consequently, an account must be created with a key pair. After the account has used the private key to approve acting as autoRenewalAccount for other entities, it 
+will be updated to remove the key pair.
 
 ## Backwards Compatibility
 
-It is optional to create an account with no public key. Existing accounts that have key(s) will not be impacted.
+It is optional to update an account to remove any existing key. Existing accounts that have key(s) will not be impacted.
 
 ## Security Implications
 
-None?
+Like a normal account, a locked account will be deleted if and when it is unable to pay its own rent. Similarly, any other state entity that points at  will face deletion if the locked 
+account has insufficient HBARs to cover the rent of that entity. Consequently, locked accounts create no risk of a Denial of Service attack against the network's 
+storage capacity.
 
 ## How to Teach This
 
 ## Rejected Ideas
+
+Alternatively, an account could set a 'rentOnly' flag , after being set the nodes would no longer accept CryptoTransfer transactions.
+
 
 
 ## Open Issues
