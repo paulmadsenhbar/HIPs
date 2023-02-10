@@ -37,7 +37,8 @@ locked account for renewal.
 ## Rationale
 
 The Sustainability ecosystem building on Hedera creates provenance chains between HTS tokens representing ecological benefits like carbom removal or renewal energy 
-credits and the physical reporting data that justifies the minting of the NFT instance. An enterprise considering buying such a carbon credit in order to offset their own carbon emissions must be confident that they will be able to subsequently sell or 'retire' that NFT. 
+credits and the physical reporting data that justifies the minting of the NFT instance. An enterprise considering buying such a carbon credit in order to offset 
+their own carbon emissions must be confident that they will be able to subsequently sell or 'retire' that NFT. 
 
 If the token class for the NFT is deleted due to rent failure, then the ability to transfer any extant token instances will inevitably be impacted (details TBD). The
 possibility of a token owner being unable to transfer theie carbon credit NFTs to a marketplace for sale, or to a smart contract for retirement, will negatively 
