@@ -1,7 +1,7 @@
 ---
 hip: xxxxx
 title: Locked Accounts
-author: Paul Madsen <paul@hbar.fund>
+author: 
 type: Standard
 needs-council-approval: No
 status: Active
@@ -40,7 +40,10 @@ The Sustainability ecosystem building on Hedera creates provenance chains betwee
 and the physical reporting data that justifies the minting of the NFT instance. An enterprise considering buying such a carbon credit in order to offset their own
 carbon emissions must be confident that they will be able to subsequently sell or 'retire' that NFT. 
 
-If the token class for the NFT is deleted due to rent failure, then the ability to transfer any extant token instances will inevitably be impacted (details TBD). 
+If the token class for the NFT is deleted due to rent failure, then the ability to transfer any extant token instances will inevitably be impacted (details TBD). The
+possibility of a token owner being unable to transfer theie carbon credit NFTs to a marketplace for sale, or to a smart contract for retirement, will negatively impact the 
+value of their tokens.  All else being equal, an NFT for which the parent token class is at risk of rent deletion will be less valuable than one whose parent token class 
+has rent visibly covered for a predictable period of time.
 
 ## Specification
 
