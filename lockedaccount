@@ -64,13 +64,16 @@ Like a normal account, a locked account will be deleted if and when it is unable
 account has insufficient HBARs to cover the rent of that entity. Consequently, locked accounts create no risk of a Denial of Service attack against the network's 
 storage capacity.
 
+A locked account can be staked like any other.
+
 ## How to Teach This
+
+A locked accounnt can have HBARs transferred in but can only be transferred out for rent payments.
 
 ## Rejected Ideas
 
-Alternatively, an account could set a 'rentOnly' flag , after being set the nodes would no longer accept CryptoTransfer transactions.
-
-
+As an alternative to an account with no keys, an account could have a 'rentOnly' flag. If set to true , the nodes would no longer accept a CryptoTransfer 
+transactions that reduced the balance of the account.
 
 ## Open Issues
 
