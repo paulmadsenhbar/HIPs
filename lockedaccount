@@ -6,7 +6,7 @@ type: Standard
 needs-council-approval: No
 status: Active
 discussions-to:
-last-call-date-time: 2022-04-15T07:00:00Z
+last-call-date-time: 
 created: 2023-02-10
 
 ---
@@ -15,11 +15,12 @@ created: 2023-02-10
 
 This HIP specifies a mechanism for locking up HBARs into an account such that those HBARs can be used only for rent payments for both the account and other state entities that designate the 
 locked account as their autoRenewalAccount. By eliminating the possibility of a CryptoTransfer removing HBARs from a locked account and guaranteeing that any HBARs in the account be used 
-only for rent payments,  
+only for rent payments, a locked account sends a strong signal of 'economic immutability' and so engenders confidence in the persistence and valuation of the state entities that
+rely on the locked account for rent payments.
 
 ## Motivation
 
-With Hedera turning on 'rent' for state entities like accounts, tokens, topics, and contracts , there is the potential for those objects to be
+With Hedera turning on 'rent' for state entities like accounts, tokens, topics, and contracts , there is the (albeit likely small) potential for those objects to be
 removed from state if rent is not paid. While mechanisms like stake rewards, token royalties, and contract fees can trickle HBARs into an account in order
 to fund rent payments for both the account and connected state entities - nothing would prevent the owner of that account using their private key to transfer
 those HBARs out of the account - and so effectively preventing future rent payments. 
@@ -30,7 +31,7 @@ Hedera state entities.
 There is therefore value in being able to guarantee rent coverage for state entities and to do so in a public & transparent manner such that participants can more easily 
 asses the risk of rent deletion.
 
-A locked account , one with no private key and so no ability to move HBARs out, would provide such a rent guarantee for the other state entities that designate the locked account 
+A locked account , one with no private key and so no ability to transfer HBARs, would provide such a rent guarantee for the other state entities that designate the locked account 
 for renewal.
 
 ## Rationale
@@ -39,18 +40,19 @@ The Sustainability ecosystem building on Hedera creates provenance chains betwee
 and the physical reporting data that justifies the minting of the NFT instance. An enterprise considering buying such a carbon credit in order to offset their own
 carbon emissions must be confident that they will be able to subsequently sell or 'retire' that NFT. 
 
-If the token class for the NFT is deleted due to rent failure, then the ability to transfer any extant token instances will inevitably be impacted (details TBD).
+If the token class for the NFT is deleted due to rent failure, then the ability to transfer any extant token instances will inevitably be impacted (details TBD). 
 
 ## Specification
 
-The 
-
+Make setKey optional on the AccountCreateTransaction transaction.
 
 ## Backwards Compatibility
 
-It is optional to 
+It is optional to create an account with no public key. Existing accounts that have key(s) will not be impacted.
 
 ## Security Implications
+
+None?
 
 ## How to Teach This
 
