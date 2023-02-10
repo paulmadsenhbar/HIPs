@@ -7,7 +7,7 @@ needs-council-approval: No
 status: Active
 discussions-to:
 last-call-date-time: 2022-04-15T07:00:00Z
-created: 2022-08-01
+created: 2023-02-10
 
 ---
 
@@ -21,17 +21,25 @@ only for rent payments,
 
 With Hedera turning on 'rent' for state entities like accounts, tokens, topics, and contracts , there is the potential for those objects to be
 removed from state if rent is not paid. While mechanisms like stake rewards, token royalties, and contract fees can trickle HBARs into an account in order
-to fiund rent payments for both the account and connected state entities - nothing would prevent the owner of that account using their private key to transfer
+to fund rent payments for both the account and connected state entities - nothing would prevent the owner of that account using their private key to transfer
 those HBARs out of the account - and so effectively preventing future rent payments. 
 
 Even just the possibility of rent payment failure and consequent state deletion may negatively impact the assurance and valuation that participants ascribe to 
-Hedera state entities.
+Hedera state entities. 
+
+There is therefore value in being able to guarantee rent coverage for state entities and to do so in a public & transparent manner such that participants can more easily 
+asses the risk of rent deletion.
+
+A locked account , one with no private key and so no ability to move HBARs out, would provide such a rent guarantee for the other state entities that designate the locked account 
+for renewal.
 
 ## Rationale
 
 The Sustainability ecosystem building on Hedera creates provenance chains between HTS tokens representing ecological benefits like carbom removal or renewal energy credits 
 and the physical reporting data that justifies the minting of the NFT instance. An enterprise considering buying such a carbon credit in order to offset their own
-carbon emissions must be confident that they will be able to subsequently sell or 'retire' that NFT.
+carbon emissions must be confident that they will be able to subsequently sell or 'retire' that NFT. 
+
+If the token class for the NFT is deleted due to rent failure, then the ability to transfer any extant token instances will inevitably be impacted (details TBD).
 
 ## Specification
 
