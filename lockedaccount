@@ -1,0 +1,62 @@
+---
+hip: xxxxx
+title: Pre-Rotated Keys 
+author: Paul Madsen <paul@hbar.fund>
+type: Standard
+needs-council-approval: No
+status: Active
+discussions-to:
+last-call-date-time: 2022-04-15T07:00:00Z
+created: 2022-08-01
+
+---
+
+## Abstract
+
+This HIP specifies a mechanism for locking up HBARs into an account such that those HBARs can be used only for rent payments for both the account and other state entities that designate the 
+locked account as their autoRenewalAccount. By eliminating the possibility of a CryptoTransfer removing HBARs from a locked account and guaranteeing that any HBARs in the account be used 
+only for rent payments,  
+
+## Motivation
+
+With Hedera turning on 'rent' for state entities like accounts, tokens, topics, and contracts , there is the potential for those objects to be
+removed from state if rent is not paid. While mechanisms like stake rewards, token royalties, and contract fees can trickle HBARs into an account in order
+to fiund rent payments for both the account and connected state entities - nothing would prevent the owner of that account using their private key to transfer
+those HBARs out of the account - and so effectively preventing future rent payments. 
+
+Even just the possibility of rent payment failure and consequent state deletion may negatively impact the assurance and valuation that participants ascribe to 
+Hedera state entities.
+
+## Rationale
+
+The Sustainability ecosystem building on Hedera creates provenance chains between HTS tokens representing ecological benefits like carbom removal or renewal energy credits 
+and the physical reporting data that justifies the minting of the NFT instance. An enterprise considering buying such a carbon credit in order to offset their own
+carbon emissions must be confident that they will be able to subsequently sell or 'retire' that NFT.
+
+## Specification
+
+The 
+
+
+## Backwards Compatibility
+
+It is optional to 
+
+## Security Implications
+
+## How to Teach This
+
+## Rejected Ideas
+
+
+## Open Issues
+
+N/A
+
+## References
+
+
+## Copyright/license
+
+This document is licensed under the Apache License, Version 2.0 -- see [LICENSE](../LICENSE) or (https://www.apache.org/licenses/LICENSE-2.0)
+s
