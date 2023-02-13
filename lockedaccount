@@ -15,7 +15,7 @@ created: 2023-02-10
 
 This HIP specifies a mechanism for locking up HBARs into an account such that those HBARs can be used only for rent payments for both the account and other state 
 entities that designate the locked account as their autoRenewalAccount. By eliminating the possibility of a CryptoTransfer removing HBARs from a locked account 
-and guaranteeing that any HBARs in the account be used only for rent payments, a locked account sends a strong signal of 'economic immutability' and so engenders 
+and guaranteeing that any HBARs in the account be used only for rent payments, a locked account sends a strong signal of 'economic immutability' and so can engender 
 confidence in the persistence and valuation of the state entities that rely on the locked account for rent payments.
 
 ## Motivation
@@ -76,6 +76,10 @@ A locked accounnt can have HBARs transferred in but can only be transferred out 
 
 As an alternative to an account with no keys, an account could have a 'rentOnly' flag. If set to true , the nodes would no longer accept a CryptoTransfer 
 transactions that reduced the balance of the account.
+
+It's conceivable that the network could enforce a minimum balance of HBARs on a locked account and so increase the chances of rent being covered. But, such a mechanism 
+presumes that their would be some loss of functionality unless that minimum threshold were met, e.g. no transfers would be possible from the account until the minimum 
+were satisfied. But of course, the premise of a locked account is that the ability to transfer HBARs out is already removed.
 
 ## Open Issues
 
