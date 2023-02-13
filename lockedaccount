@@ -40,7 +40,7 @@ those HBARs out of the account - and so effectively preventing future rent payme
 Even just the possibility of rent payment failure and consequent state deletion may negatively impact the assurance and valuation that participants ascribe to 
 Hedera state entities. 
 
-There is therefore value in being able to guarantee rent coverage for state entities and to do so in a public & transparent manner such that participants can more 
+There is therefore value in being able to guarantee (or at least maxmimize the chances of) rent coverage for state entities and to do so in a public & transparent manner such that participants can more 
 easily assess the risk of rent deletion. Strictly speaking, it is impossible to guarantee that the rent for a state entity will be covered by a certain number of HBARs in  
 
 A locked account , one with no private key and so no ability to transfer HBARs, would provide such a rent guarantee for the other state entities that designate the
