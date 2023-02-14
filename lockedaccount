@@ -53,8 +53,13 @@ Nevertheless, eliminating the possibility of explicit transfers out of the accou
 If an account has no public key, and so no associated private key, it would be unable to sign the transaction, either create or update, that designated the
 account as the autoRenewalAccount for some other state entity.
 
-Consequently, an account must be created with a key pair. After the account has used the private key to approve acting as autoRenewalAccount for other entities, it 
-will be updated to remove the key pair.
+Consequently, an account must be created with a key pair as is the normal case.
+
+After the account has used the private key to approve acting as autoRenewalAccount for other entities, it 
+will be updated to remove the key pair by sending a CryptoAccountUpdate transaction remiving the existing key(s).
+
+Once an account has been locked, it can no longer be designated as the autoRenewalAccount for other state entities.
+ 
 
 ## Backwards Compatibility
 
@@ -70,7 +75,7 @@ A locked account can be staked like any other.
 
 ## How to Teach This
 
-A locked accounnt can have HBARs transferred in but can only be transferred out for rent payments.
+A locked accounnt can have HBARs transferred in but can only be removed for rent payments and not transferred out via a CryptoTransfer transaction.
 
 ## Rejected Ideas
 
@@ -83,7 +88,14 @@ were satisfied. But of course, the premise of a locked account is that the abili
 
 ## Open Issues
 
-N/A
+There could be value in a more comprehensive mechanism for garanteeing that rent is paid . Below is proposal from Giuseppe Bertone
+
+* Each entity (accounts, contracts, files, tokens, and topics) has a rent vault (or rent balance).
+* Anyone can send HBARs to the entity’s rent vault (i.e., using a dedicated toRentVault flag, default false, in AccountAmount https://github.com/hashgraph/hedera-protobufs-java/blob/main/docs/NotNestedDoc.md#accountamount)
+* HBARs can never leave the rent vault via traditional transactions.
+* The current rent flow is modified, so HBARs in the rent vault are spent before other options.
+* If the rent balance is insufficient to keep the entity alive, partial payment is made, and the expiration is partially extended.
+* At the next renewal, the other rent options apply if the rent balance is still 0.
 
 ## References
 
