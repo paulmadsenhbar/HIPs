@@ -50,20 +50,16 @@ Nevertheless, eliminating the possibility of explicit transfers out of the accou
 
 ## Specification
 
-If an account has no public key, and so no associated private key, it would be unable to sign the transaction, either create or update, that designated the
-account as the autoRenewalAccount for some other state entity.
+To prevent an account from transfering HBARs it can be created to (or updated to) have no associated public key(s).
 
-Consequently, an account must be created with a key pair as is the normal case.
+To allow an account to authorize acting as the `autoRenewalAccount` for another entity, a new optional `rentKey` is defined.
 
-After the account has used the private key to approve acting as autoRenewalAccount for other entities, it 
-will be updated to remove the key pair by sending a CryptoAccountUpdate transaction remiving the existing key(s).
-
-Once an account has been locked, it can no longer be designated as the autoRenewalAccount for other state entities.
- 
+If an account has a `rentKey` then it must sign any transaction that designates the account as the `autoRenewalAccount` . If the account has no `rentKey` then 
+the account's existing key can sign instead. 
 
 ## Backwards Compatibility
 
-It is optional to update an account to remove any existing key. Existing accounts that have key(s) will not be impacted.
+Existing accounts that have key(s) will not be impacted. It is optional to create, or update, an account to have no key for transferring HBARs. 
 
 ## Security Implications
 
@@ -71,7 +67,7 @@ Like a normal account, a locked account will be deleted if and when it is unable
 account has insufficient HBARs to cover the rent of that entity. Consequently, locked accounts create no risk of a Denial of Service attack against the network's 
 storage capacity.
 
-A locked account can be staked like any other.
+A locked account can be staked like any other but must be staked before its key is removed. If created with no key, an account cannot be staked.
 
 ## How to Teach This
 
