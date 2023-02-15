@@ -63,6 +63,7 @@ Below is an example message
 {
 	'type': 'Standard Registry',
 	'id': '35c5d340-1a93-475d-9659-818bb77d45df',
+	'status':'ISSUE',
 	'did': 'did:hedera:testnet:vzN41A2bMhvYGhg7oCMoo5UAzQ6PCTq4VTQaNPE1uPG;hedera:testnet:tid=0.0.3423402',
 	'action': 'Init',
 	'topicId': '0.0.34234020',
