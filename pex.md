@@ -17,11 +17,8 @@ This HIP specifies a binding of the DIF Presentation Exchange pattern to IPFS & 
 
 ## Motivation
 
-the Guardian Selective Disclosure architecture allows a Guardian admin to stipulate what attributes within a Verifiable Credential (VC) should not be available to the 
-public, but rather only to authorized requestors. For such a VC, the corresponding Verifiable Presentation (VP) published to IPFS will not contain those protected attributes, 
-but rather an 
-
-This logical interaction 
+The Guardian Selective Disclosure architecture allows a Guardian admin to stipulate what attributes within a Verifiable Credential (VC) should not be available to the 
+public, but rather only to authorized requestors. For such a VC, the corresponding Verifiable Presentation (VP) published to IPFS will not contain those protected attributes, but rather a 'Presentation Definition' indicating the nature of the proof required to access them. If and when some other actor is able to demonstrate the stipulated proof on a request as a 'Presentation Submission', the protected attributes will be released to them. 
 
 ## Rationale
 
