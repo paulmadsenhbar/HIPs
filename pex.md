@@ -13,7 +13,7 @@ created: 2023-02-10
 
 ## Abstract
 
-This HIP specifies a binding of the DID Presentation Exchange pattern to IPFS & Hedera Consensus Service as part of the Guardian architecture.
+This HIP specifies a binding of the DIF Presentation Exchange pattern to IPFS & Hedera Consensus Service as part of the Guardian architecture. An authorized actor (e.g.an Auditor or Regulator) is able to access non-public attributes associated with a sustainability project by proof of their certications attached to an HCS message requesting that access. 
 
 ## Motivation
 
@@ -25,12 +25,19 @@ This logical interaction
 
 ## Rationale
 
-The DID Presentation Exchange specification (https://identity.foundation/presentation-exchange/) defines an abstract pattern between a Verifier and a Holder - specifically 
+The DIF Presentation Exchange specification (https://identity.foundation/presentation-exchange/) defines an abstract pattern between a Verifier and a Holder - specifically 
 "a way for Verifiers to describe proof requirements, and for Holders to describe submissions of proof which align with those requirements."
 
 This specification defines a binding of this abstract pettern for the Guardian Selective Disclosure architecture that uses IPFS & Hedera Consensus Service (HCS)
 
 ## Specification
+
+### High-Level Flow
+
+1. A Guardian implementation, acting as a Verifier, publishes a protected VP to IPFS. The VP indicates that there are non-public attributes available to requestors that have a certain role. Thism is the Presentation Definition.
+2. An Auditor is notified of the availability of the non-public attributes. They determine they meet the necessary authorization rule
+3. The Auditor, acting as a Holder, creates an HCS message requesting access to the non-public VP. The HCS message carries a VP proving their certification. The HCS message is submitted to the Hedera network. This is the Presentation Submission.
+4. The Guardian implementation is notified of the request. It validates the Holder's VP and compares the certifications within the Holder's VC to the Presentation Definition
 
 ### Presentation Definition
 
