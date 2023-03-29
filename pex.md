@@ -33,8 +33,8 @@ This specification defines a binding of this abstract pettern for the Guardian S
 
 1. A Guardian implementation, acting as a Verifier, publishes a protected VP to IPFS. The VP indicates that there are non-public attributes available to requestors that have a certain role. Thism is the Presentation Definition.
 2. An Auditor is notified of the availability of the non-public attributes. They determine they meet the necessary authorization rule
-3. The Auditor, acting as a Holder, creates an HCS message requesting access to the non-public VP. The HCS message carries a VP proving their certification. The HCS message is submitted to the Hedera network. This is the Presentation Submission.
-4. The Guardian implementation is notified of the request. It validates the Holder's VP and compares the certifications within the Holder's VC to the Presentation Definition
+3. The Auditor, acting as a Verifier, creates an HCS message requesting access to the non-public VP. The HCS message carries a VP proving their certification. The HCS message is submitted to the Hedera network. This is the Presentation Request
+4. The Guardian implementation is notified of the request. It validates the Verifiers's VP and compares the certifications within the Verifier's VC to the Presentation Definition
 
 ### Presentation Definition
 
