@@ -13,7 +13,7 @@ created: 2023-02-10
 
 ## Abstract
 
-This HIP specifies a binding of the DIF Presentation Exchange pattern to Hedera services as he Guardian architecture. An authorized actor (e.g.an Auditor or Regulator) is able to access non-public attributes associated with a sustainability project by proof of their certications attached to an HCS message requesting that access. By using HCS, we ensure a provable history of request & response for such protected attributes.
+This HIP specifies a binding of the DIF Presentation Exchange pattern to Hedera services as part of the Guardian architecture. An authorized actor (e.g.an Auditor or Regulator) is able to access non-public attributes associated with a sustainability project by proof of their certications attached to an HCS message requesting that access. By using HCS, we ensure a provable history of request & response for such protected attributes.
 
 ## Motivation
 
@@ -23,9 +23,10 @@ public, but rather only to authorized requestors. For such a VC, the correspondi
 ## Rationale
 
 The DIF Presentation Exchange specification (https://identity.foundation/presentation-exchange/) defines an abstract pattern between a Verifier and a Holder - specifically 
+
 "a way for Verifiers to describe proof requirements, and for Holders to describe submissions of proof which align with those requirements."
 
-This specification defines a binding of this abstract pettern for the Guardian Selective Disclosure architecture that uses IPFS & Hedera Consensus Service (HCS)
+This specification defines a binding of this abstract pattern for the Guardian Selective Disclosure architecture that uses Hedera Consensus Service (HCS) and other Hedera serfvices.
 
 ## Specification
 
