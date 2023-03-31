@@ -13,7 +13,7 @@ created: 2023-02-10
 
 ## Abstract
 
-This HIP specifies a binding of the DIF Presentation Exchange pattern to IPFS & Hedera Consensus Service as part of the Guardian architecture. An authorized actor (e.g.an Auditor or Regulator) is able to access non-public attributes associated with a sustainability project by proof of their certications attached to an HCS message requesting that access. By using HCS, we ensure a provable history of request & response for such protected attributes.
+This HIP specifies a binding of the DIF Presentation Exchange pattern to Hedera services as he Guardian architecture. An authorized actor (e.g.an Auditor or Regulator) is able to access non-public attributes associated with a sustainability project by proof of their certications attached to an HCS message requesting that access. By using HCS, we ensure a provable history of request & response for such protected attributes.
 
 ## Motivation
 
